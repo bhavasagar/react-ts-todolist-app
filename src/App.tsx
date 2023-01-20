@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import "./components/styles.css";
+import { InputField } from './components/InputField';
+import { Todos } from './components/Todos';
+import { Todo } from './model';
 
-function App() {
+const App: React.FC = () => {
+
+  const [todo, setTodo] = useState<string>("");
+  // console.log(todo);
+
+  const [todos, setTodos] = useState<Todo[]>([]);
+  // console.log(todos);
+  
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!todo) return;
+    
+    setTodos([...todos, {id: Date.now(), task:todo, state: "pending"}]);    
+    setTodo("");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="heading">
+          Note My Tasks
+      </div>
+      <InputField todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
+      <Todos todos={todos} setTodos={setTodos} setTodo={setTodo} />
     </div>
   );
 }
