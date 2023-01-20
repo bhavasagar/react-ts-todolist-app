@@ -56,16 +56,55 @@
 
 .todo__item {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     margin: 1rem 0.5rem;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 1.5rem;
     background: yellow;
-    font-size: 1.2rem;
+    /* background: url('https://img.freepik.com/free-photo/yellow-clay-textured-background-colorful-handmade-creative-art-abstract-style_53876-134213.jpg?w=1380&t=st=1674222619~exp=1674223219~hmac=c0f27cd9cd312666acd86f14c7e3bd6fdd9e63eb90d39bc65ac0acc05e984537'); */
+    font-size: 1.5rem;
     width: 45%;
-    max-width: 45%;
+    height: 3rem;
+    /* max-width: 45%; */
+}
+
+.task__striken {
+    text-decoration: line-through;
+}   
+
+.todo__item--modifiers {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.todo__item--icon {
+    padding: 0 0.25rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.todo__item--task-edit input{    
+    padding: 0.5rem 0.25rem;
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+}
+
+.todo__item--task-edit input:focus, .todo__item--task-edit input:focus-visible {
+    outline: none;
+    border: none;
 }
 
 @media (max-width: 1200px) {
     .input {
         width: 90%;
+    }
+
+    .todo__item {
+        width: 90%;
+        margin: inherit auto;
     }
 }

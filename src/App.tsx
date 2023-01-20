@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import './App.css';
 import "./components/styles.css";
 import { InputField } from './components/InputField';
 import { Todos } from './components/Todos';
 import { Todo } from './model';
 
-const App: React.FC = () => {
-
+const App: React.FC = () => {  
+  
   const [todo, setTodo] = useState<string>("");
   // console.log(todo);
-
+  
   const [todos, setTodos] = useState<Todo[]>([]);
   // console.log(todos);
+  // useEffect(() => {
+  //   localStorage.setItem('task-app--todos', JSON.stringify(todos));
+  // }, [todos]);
   
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -29,7 +32,7 @@ const App: React.FC = () => {
           Note My Tasks
       </div>
       <InputField todo={todo} setTodo={setTodo} handleSubmit={handleSubmit} />
-      <Todos todos={todos} setTodos={setTodos} setTodo={setTodo} />
+      <Todos todos={todos} setTodos={setTodos} />
     </div>
   );
 }
