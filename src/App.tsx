@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import './App.css';
 import "./components/styles.css";
 import { InputField } from './components/InputField';
@@ -8,13 +8,23 @@ import { Todo } from './model';
 const App: React.FC = () => {  
   
   const [todo, setTodo] = useState<string>("");
+  const IsFirstRun = useRef<boolean>(false);  
   // console.log(todo);
   
   const [todos, setTodos] = useState<Todo[]>([]);
   // console.log(todos);
-  // useEffect(() => {
-  //   localStorage.setItem('task-app--todos', JSON.stringify(todos));
-  // }, [todos]);
+  useEffect(() => {
+    IsFirstRun.current = true;
+    console.log(localStorage.getItem('task-app--todos'));
+    setTodos(JSON.parse(localStorage.getItem('task-app--todos') || "[]"));
+  }, []);
+
+  useEffect(() => {    
+    console.log(localStorage.getItem('task-app--todos'), IsFirstRun.current)
+    if (!IsFirstRun.current)
+      localStorage.setItem('task-app--todos', JSON.stringify(todos));
+    IsFirstRun.current = false;
+  }, [todos]);  
   
 
   const handleSubmit = (e: React.FormEvent) => {
